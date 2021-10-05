@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { useGetCryptosQuery } from '../services/cryptoApi';
 import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi';
-// import Loader from './Loader';
+import Loader from './Loader';
 
 const demoImage =
   'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
@@ -20,7 +20,7 @@ const News = ({ simplified }) => {
     count: simplified ? 6 : 12,
   });
 
-  if (!cryptoNews?.value) return 'Loading...';
+  if (!cryptoNews?.value) return <Loader />;
 
   return (
     <Row gutter={[24, 24]}>
@@ -52,9 +52,8 @@ const News = ({ simplified }) => {
                   {news.name}
                 </Title>
                 <img
-                  style={{ maxWidth: '200px', maxHeight: '100px' }}
                   src={news?.image?.thumbnail?.contentUrl || demoImage}
-                  alt='news'
+                  alt=''
                 />
               </div>
               <p>
@@ -69,7 +68,7 @@ const News = ({ simplified }) => {
                       news.provider[0]?.image?.thumbnail?.contentUrl ||
                       demoImage
                     }
-                    alt='news'
+                    alt=''
                   />
                   <Text className='provider-name'>
                     {news.provider[0]?.name}
